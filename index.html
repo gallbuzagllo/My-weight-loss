@@ -1,209 +1,327 @@
-```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ירידה במשקל 💚</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המסע שלי 💚</title>
 
-  <style>
+<style>
     * {
-      box-sizing: border-box;
+        box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f8f5;
-      color: #26352b;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f2e9;
+        color: #26352d;
     }
 
-    .header {
-      background: linear-gradient(135deg, #8fc99a, #5fae72);
-      color: white;
-      padding: 35px 20px;
-      text-align: center;
-      border-radius: 0 0 30px 30px;
+    .app {
+        max-width: 500px;
+        margin: auto;
+        padding: 24px 18px 100px;
     }
 
-    .header h1 {
-      margin: 0 0 10px;
-      font-size: 32px;
+    .greeting {
+        margin-bottom: 24px;
     }
 
-    .header p {
-      margin: 0;
-      font-size: 17px;
+    .greeting h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
     }
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
+    .greeting p {
+        margin: 0;
+        color: #718078;
+        font-size: 16px;
     }
 
     .card {
-      background: white;
-      border-radius: 22px;
-      padding: 22px;
-      margin: 18px 0;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 22px;
+        margin-bottom: 16px;
+        box-shadow: 0 5px 20px rgba(50, 70, 60, 0.08);
     }
 
-    .card h2 {
-      margin-top: 0;
-      color: #4d8f5c;
+    .main-card {
+        background: #dce8dc;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    .label {
+        font-size: 14px;
+        color: #64746b;
+        margin-bottom: 8px;
     }
 
-    .stat {
-      background: #eef7ef;
-      padding: 18px;
-      border-radius: 16px;
-      text-align: center;
+    .weight {
+        font-size: 46px;
+        font-weight: 700;
+        margin-bottom: 8px;
     }
 
-    .stat strong {
-      display: block;
-      font-size: 25px;
-      color: #4d8f5c;
-      margin-bottom: 5px;
+    .empty {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+
+    .subtitle {
+        color: #64746b;
+        font-size: 14px;
+    }
+
+    .goal-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .goal-title h2 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .goal-number {
+        font-size: 34px;
+        font-weight: 700;
+        margin: 8px 0;
     }
 
     .progress {
-      background: #e4e9e4;
-      height: 18px;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-top: 15px;
+        height: 12px;
+        background: #e4e9e2;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 16px 0 10px;
     }
 
     .progress-bar {
-      width: 40%;
-      height: 100%;
-      background: #68b878;
-      border-radius: 20px;
+        height: 100%;
+        width: 0%;
+        background: #799b82;
+        border-radius: 20px;
+        transition: width 0.4s ease;
     }
 
-    .button {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 12px;
-      background: #68b878;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
+    .progress-text {
+        font-size: 14px;
+        color: #64746b;
     }
 
-    .button:hover {
-      background: #579f66;
+    .menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
 
-    .motivation {
-      text-align: center;
-      font-size: 19px;
-      line-height: 1.6;
+    .menu-button {
+        border: none;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 20px 12px;
+        font-size: 15px;
+        color: #26352d;
+        box-shadow: 0 5px 18px rgba(50, 70, 60, 0.06);
     }
 
-    .footer {
-      text-align: center;
-      padding: 25px;
-      color: #718075;
-      font-size: 14px;
+    .menu-icon {
+        font-size: 28px;
+        display: block;
+        margin-bottom: 8px;
     }
-  </style>
+
+    .start-info {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .start-info div {
+        flex: 1;
+    }
+
+    .small-number {
+        font-size: 22px;
+        font-weight: 650;
+        margin-top: 5px;
+    }
+
+    .nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(500px, 100%);
+        background: rgba(255,255,255,0.96);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid #e5e7e2;
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
+    }
+
+    .nav-item {
+        font-size: 12px;
+        color: #718078;
+        text-align: center;
+    }
+
+    .nav-icon {
+        display: block;
+        font-size: 21px;
+        margin-bottom: 3px;
+    }
+</style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>🌿 המסע שלי לירידה במשקל</h1>
-    <p>צעד קטן בכל יום 💚</p>
-  </div>
+<div class="app">
 
-  <div class="container">
+    <div class="greeting">
+        <h1>המסע שלי 🌿</h1>
+        <p>כל צעד קטן הוא התקדמות.</p>
+    </div>
 
-    <div class="card">
-      <h2>📊 הנתונים שלי</h2>
-
-      <div class="stats">
-        <div class="stat">
-          <strong>100</strong>
-          ק"ג
+    <div class="card main-card">
+        <div class="label">המשקל הנוכחי</div>
+        <div id="currentWeight" class="empty">עדיין אין שקילה</div>
+        <div id="currentDate" class="subtitle">
+            כשתוסיפי שקילה, היא תופיע כאן
         </div>
-
-        <div class="stat">
-          <strong>13</strong>
-          ק"ג ליעד
-        </div>
-
-        <div class="stat">
-          <strong>1,200</strong>
-          קלוריות ליום
-        </div>
-
-        <div class="stat">
-          <strong>25</strong>
-          גיל
-        </div>
-      </div>
     </div>
 
     <div class="card">
-      <h2>🎯 ההתקדמות שלי</h2>
+        <div class="goal-title">
+            <h2>המטרה הקרובה 🎯</h2>
+        </div>
 
-      <p>היעד שלי: ירידה של 13 ק"ג</p>
+        <div class="goal-number">95 ק״ג</div>
 
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
+        <div id="remaining" class="subtitle">
+            נשארו 9.7 ק״ג
+        </div>
 
-      <p style="text-align:center;">
-        כל קילוגרם הוא צעד קדימה 💪
-      </p>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div id="progressText" class="progress-text">
+            מתחילים את הדרך 💚
+        </div>
     </div>
 
     <div class="card">
-      <h2>🥗 היום שלי</h2>
+        <div class="label">תחילת התהליך</div>
 
-      <button class="button" onclick="alert('כאן נוסיף בהמשך מעקב ארוחות 🍽️')">
-        ➕ הוספת ארוחה
-      </button>
+        <div class="start-info">
+            <div>
+                <div class="subtitle">משקל התחלתי</div>
+                <div class="small-number">104.7 ק״ג</div>
+            </div>
 
-      <button class="button" onclick="alert('כאן נוסיף בהמשך מעקב מים 💧')">
-        💧 מעקב מים
-      </button>
-
-      <button class="button" onclick="alert('כאן נוסיף בהמשך מעקב פעילות 🏃‍♀️')">
-        🏃‍♀️ הוספת פעילות
-      </button>
+            <div>
+                <div class="subtitle">תאריך התחלה</div>
+                <div class="small-number">10/04/2026</div>
+            </div>
+        </div>
     </div>
 
-    <div class="card motivation">
-      <h2>💚 תזכורת יומית</h2>
+    <div class="menu">
+        <button class="menu-button">
+            <span class="menu-icon">⚖️</span>
+            מעקב משקל
+        </button>
 
-      <p>
-        אני לא צריכה להיות מושלמת.<br>
-        אני רק צריכה להמשיך.
-      </p>
+        <button class="menu-button">
+            <span class="menu-icon">🍽️</span>
+            קלוריות וחלבון
+        </button>
 
-      <p>כל יום הוא הזדמנות חדשה 🌱</p>
+        <button class="menu-button">
+            <span class="menu-icon">🥗</span>
+            האוכל שלי
+        </button>
+
+        <button class="menu-button">
+            <span class="menu-icon">📊</span>
+            ההתקדמות שלי
+        </button>
     </div>
 
-  </div>
+</div>
 
-  <div class="footer">
-    המסע שלי • גרסה ראשונה 💚
-  </div>
+<div class="nav">
+    <div class="nav-item">
+        <span class="nav-icon">🏠</span>
+        בית
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">⚖️</span>
+        משקל
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">🍽️</span>
+        אוכל
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">📊</span>
+        התקדמות
+    </div>
+</div>
+
+<script>
+    const START_WEIGHT = 104.7;
+    const GOAL_WEIGHT = 95;
+
+    const savedWeights =
+        JSON.parse(localStorage.getItem("weightEntries")) || [];
+
+    if (savedWeights.length > 0) {
+
+        const latest =
+            savedWeights[savedWeights.length - 1];
+
+        const currentWeight =
+            Number(latest.weight);
+
+        const lost =
+            START_WEIGHT - currentWeight;
+
+        const remaining =
+            Math.max(currentWeight - GOAL_WEIGHT, 0);
+
+        const totalNeeded =
+            START_WEIGHT - GOAL_WEIGHT;
+
+        const progress =
+            Math.min(Math.max((lost / totalNeeded) * 100, 0), 100);
+
+        document.getElementById("currentWeight").textContent =
+            currentWeight.toFixed(1) + " ק״ג";
+
+        document.getElementById("currentDate").textContent =
+            "שקילה אחרונה: " + latest.date;
+
+        document.getElementById("remaining").textContent =
+            "נשארו " + remaining.toFixed(1) + " ק״ג";
+
+        document.getElementById("progressBar").style.width =
+            progress + "%";
+
+        document.getElementById("progressText").textContent =
+            "ירדת " + lost.toFixed(1) +
+            " ק״ג — " + Math.round(progress) +
+            "% מהדרך למטרה 💚";
+    }
+</script>
 
 </body>
 </html>
-```
