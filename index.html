@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>המסע שלי 💚</title>
+
+<title>המסע שלי 🌿</title>
 
 <style>
     * {
@@ -12,104 +13,118 @@
 
     body {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f5f2e9;
-        color: #26352d;
+        font-family: Arial, sans-serif;
+        background: #f5f7f2;
+        color: #26332b;
     }
 
     .app {
-        max-width: 500px;
+        max-width: 600px;
         margin: auto;
-        padding: 24px 18px 100px;
+        padding: 20px 16px 40px;
     }
 
+    h1, h2, h3, p {
+        margin-top: 0;
+    }
+
+    .screen {
+        display: none;
+    }
+
+    .screen.active {
+        display: block;
+    }
+
+    /* HOME */
+
     .greeting {
-        margin-bottom: 24px;
+        text-align: center;
+        margin: 15px 0 20px;
     }
 
     .greeting h1 {
-        margin: 0 0 6px;
-        font-size: 30px;
+        font-size: 32px;
+        margin-bottom: 8px;
     }
 
     .greeting p {
-        margin: 0;
         color: #718078;
-        font-size: 16px;
+    }
+
+    .daily-quote {
+        background: #dfeee3;
+        border-radius: 24px;
+        padding: 28px 22px;
+        text-align: center;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .daily-quote .quote-label {
+        font-size: 14px;
+        color: #66806d;
+        margin-bottom: 12px;
+    }
+
+    .daily-quote .quote {
+        font-size: 22px;
+        font-weight: bold;
+        line-height: 1.5;
     }
 
     .card {
-        background: #ffffff;
-        border-radius: 24px;
-        padding: 22px;
+        background: white;
+        border-radius: 22px;
+        padding: 20px;
         margin-bottom: 16px;
-        box-shadow: 0 5px 20px rgba(50, 70, 60, 0.08);
-    }
-
-    .main-card {
-        background: #dce8dc;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
     .label {
         font-size: 14px;
-        color: #64746b;
+        color: #718078;
         margin-bottom: 8px;
     }
 
-    .weight {
-        font-size: 46px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    .empty {
-        font-size: 24px;
-        font-weight: 600;
-        margin: 10px 0;
+    .main-number {
+        font-size: 34px;
+        font-weight: bold;
     }
 
     .subtitle {
-        color: #64746b;
+        color: #7c8780;
         font-size: 14px;
-    }
-
-    .goal-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-    }
-
-    .goal-title h2 {
-        margin: 0;
-        font-size: 20px;
+        margin-top: 6px;
     }
 
     .goal-number {
-        font-size: 34px;
-        font-weight: 700;
+        font-size: 30px;
+        font-weight: bold;
         margin: 8px 0;
     }
 
     .progress {
         height: 12px;
-        background: #e4e9e2;
+        background: #e6ebe7;
         border-radius: 20px;
         overflow: hidden;
-        margin: 16px 0 10px;
+        margin-top: 15px;
     }
 
     .progress-bar {
         height: 100%;
         width: 0%;
-        background: #799b82;
+        background: #7da889;
         border-radius: 20px;
-        transition: width 0.4s ease;
+        transition: 0.4s;
     }
 
     .progress-text {
+        text-align: center;
+        margin-top: 10px;
         font-size: 14px;
-        color: #64746b;
+        color: #718078;
     }
 
     .menu {
@@ -120,60 +135,219 @@
 
     .menu-button {
         border: none;
-        background: #ffffff;
+        background: white;
         border-radius: 20px;
-        padding: 20px 12px;
-        font-size: 15px;
-        color: #26352d;
-        box-shadow: 0 5px 18px rgba(50, 70, 60, 0.06);
+        padding: 20px 10px;
+        font-size: 16px;
+        color: #26332b;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .menu-button:active {
+        transform: scale(0.98);
     }
 
     .menu-icon {
-        font-size: 28px;
         display: block;
+        font-size: 30px;
         margin-bottom: 8px;
     }
 
-    .start-info {
+    /* GENERAL */
+
+    .top-bar {
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .back-button {
+        border: none;
+        background: white;
+        border-radius: 14px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        margin: 0;
+    }
+
+    .section-title {
+        margin-top: 25px;
+        margin-bottom: 12px;
+    }
+
+    .primary-button {
+        width: 100%;
+        border: none;
+        background: #70977b;
+        color: white;
+        padding: 15px;
+        border-radius: 16px;
+        font-size: 17px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .secondary-button {
+        border: none;
+        background: #edf2ee;
+        color: #45604d;
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    .danger-button {
+        border: none;
+        background: #fff0f0;
+        color: #a45d5d;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #dce3de;
+        border-radius: 14px;
+        font-size: 16px;
+        margin-top: 6px;
+        margin-bottom: 14px;
+        direction: rtl;
+    }
+
+    label {
+        font-size: 14px;
+        color: #647168;
+    }
+
+    /* FOOD */
+
+    .today-summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 12px;
+        margin-bottom: 18px;
     }
 
-    .start-info div {
-        flex: 1;
+    .summary-box {
+        background: white;
+        border-radius: 20px;
+        padding: 18px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
-    .small-number {
-        font-size: 22px;
-        font-weight: 650;
+    .summary-number {
+        font-size: 27px;
+        font-weight: bold;
         margin-top: 5px;
     }
 
-    .nav {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(500px, 100%);
-        background: rgba(255,255,255,0.96);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid #e5e7e2;
+    .summary-label {
+        font-size: 13px;
+        color: #748078;
+    }
+
+    .food-item {
+        background: white;
+        border-radius: 18px;
+        padding: 16px;
+        margin-bottom: 10px;
         display: flex;
-        justify-content: space-around;
-        padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        cursor: pointer;
     }
 
-    .nav-item {
-        font-size: 12px;
-        color: #718078;
+    .food-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .food-info {
+        font-size: 13px;
+        color: #77827b;
+    }
+
+    .food-actions {
+        display: flex;
+        gap: 6px;
+    }
+
+    .empty-message {
         text-align: center;
+        color: #7b867f;
+        padding: 25px 10px;
     }
 
-    .nav-icon {
-        display: block;
-        font-size: 21px;
-        margin-bottom: 3px;
+    .today-entry {
+        background: white;
+        border-radius: 16px;
+        padding: 14px;
+        margin-bottom: 9px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 100;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: white;
+        width: 100%;
+        max-width: 450px;
+        border-radius: 24px;
+        padding: 24px;
+    }
+
+    .modal-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .modal-buttons button {
+        flex: 1;
+    }
+
+    .cancel-button {
+        border: none;
+        background: #edf0ed;
+        color: #536057;
+        padding: 14px;
+        border-radius: 14px;
+        cursor: pointer;
+    }
+
+    .notice {
+        background: #f0f5f1;
+        border-radius: 16px;
+        padding: 14px;
+        color: #647168;
+        font-size: 14px;
+        margin-bottom: 15px;
     }
 </style>
 </head>
@@ -182,145 +356,839 @@
 
 <div class="app">
 
-    <div class="greeting">
-        <h1>המסע שלי 🌿</h1>
-        <p>כל צעד קטן הוא התקדמות.</p>
-    </div>
+    <!-- HOME -->
+    <section id="homeScreen" class="screen active">
 
-    <div class="card main-card">
-        <div class="label">המשקל הנוכחי</div>
-        <div id="currentWeight" class="empty">עדיין אין שקילה</div>
-        <div id="currentDate" class="subtitle">
-            כשתוסיפי שקילה, היא תופיע כאן
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="goal-title">
-            <h2>המטרה הקרובה 🎯</h2>
+        <div class="greeting">
+            <h1>המסע שלי 🌿</h1>
+            <p>כל צעד קטן הוא התקדמות.</p>
         </div>
 
-        <div class="goal-number">95 ק״ג</div>
-
-        <div id="remaining" class="subtitle">
-            נשארו 9.7 ק״ג
-        </div>
-
-        <div class="progress">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
-
-        <div id="progressText" class="progress-text">
-            מתחילים את הדרך 💚
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="label">תחילת התהליך</div>
-
-        <div class="start-info">
-            <div>
-                <div class="subtitle">משקל התחלתי</div>
-                <div class="small-number">104.7 ק״ג</div>
-            </div>
-
-            <div>
-                <div class="subtitle">תאריך התחלה</div>
-                <div class="small-number">10/04/2026</div>
+        <div class="daily-quote">
+            <div class="quote-label">✨ המשפט שלי להיום</div>
+            <div class="quote">
+                אני לא צריכה להיות מושלמת. אני רק צריכה להמשיך.
             </div>
         </div>
-    </div>
 
-    <div class="menu">
-        <button class="menu-button">
-            <span class="menu-icon">⚖️</span>
-            מעקב משקל
+        <div class="card">
+            <div class="label">המשקל הנוכחי</div>
+            <div id="homeWeight" class="main-number">עדיין אין שקילה</div>
+            <div id="homeWeightDate" class="subtitle">
+                כשתוסיפי שקילה, היא תופיע כאן
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="label">המטרה הקרובה 🎯</div>
+            <div class="goal-number">95 ק״ג</div>
+
+            <div id="homeRemaining" class="subtitle">
+                מתחילים את הדרך
+            </div>
+
+            <div class="progress">
+                <div id="homeProgressBar" class="progress-bar"></div>
+            </div>
+
+            <div id="homeProgressText" class="progress-text">
+                מתחילים את הדרך 💚
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="label">תחילת התהליך</div>
+
+            <div style="display:flex; justify-content:space-between; gap:20px;">
+                <div>
+                    <div class="subtitle">משקל התחלתי</div>
+                    <strong>104.7 ק״ג</strong>
+                </div>
+
+                <div>
+                    <div class="subtitle">תאריך התחלה</div>
+                    <strong>10/04/2026</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+
+            <button class="menu-button" onclick="showScreen('weightScreen')">
+                <span class="menu-icon">⚖️</span>
+                מעקב משקל
+            </button>
+
+            <button class="menu-button" onclick="showScreen('foodScreen')">
+                <span class="menu-icon">🍽️</span>
+                האוכל שלי
+            </button>
+
+            <button class="menu-button" onclick="showScreen('caloriesScreen')">
+                <span class="menu-icon">🔥</span>
+                קלוריות וחלבון
+            </button>
+
+            <button class="menu-button" onclick="showScreen('progressScreen')">
+                <span class="menu-icon">📊</span>
+                ההתקדמות שלי
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOD -->
+    <section id="foodScreen" class="screen">
+
+        <div class="top-bar">
+            <button class="back-button" onclick="showScreen('homeScreen')">
+                ← חזרה
+            </button>
+
+            <h1 class="page-title">האוכל שלי 🥗</h1>
+        </div>
+
+        <div class="today-summary">
+
+            <div class="summary-box">
+                <div class="summary-label">קלוריות היום</div>
+                <div id="todayCalories" class="summary-number">0</div>
+            </div>
+
+            <div class="summary-box">
+                <div class="summary-label">חלבון היום</div>
+                <div id="todayProtein" class="summary-number">0 ג׳</div>
+            </div>
+
+        </div>
+
+        <button class="primary-button" onclick="openAddProductModal()">
+            + הוספת מוצר חדש
         </button>
 
-        <button class="menu-button">
-            <span class="menu-icon">🍽️</span>
-            קלוריות וחלבון
+        <h2 class="section-title">המוצרים שלי 🧺</h2>
+
+        <div class="notice">
+            הוסיפי כל מוצר שאת משתמשת בו באופן קבוע.
+            בפעם הבאה פשוט תלחצי עליו ותזיני כמה גרם אכלת.
+        </div>
+
+        <div id="productsList"></div>
+
+        <h2 class="section-title">מה אכלתי היום 🍽️</h2>
+
+        <div id="todayFoodList"></div>
+
+    </section>
+
+
+    <!-- WEIGHT -->
+    <section id="weightScreen" class="screen">
+
+        <div class="top-bar">
+            <button class="back-button" onclick="showScreen('homeScreen')">
+                ← חזרה
+            </button>
+
+            <h1 class="page-title">המשקל שלי ⚖️</h1>
+        </div>
+
+        <div class="card">
+
+            <h3>הוספת שקילה</h3>
+
+            <label>משקל בק״ג</label>
+            <input id="weightInput" type="number" step="0.1" placeholder="לדוגמה: 99.8">
+
+            <button class="primary-button" onclick="addWeight()">
+                שמירת שקילה
+            </button>
+
+        </div>
+
+        <h2 class="section-title">שקילות קודמות</h2>
+
+        <div id="weightHistory"></div>
+
+    </section>
+
+
+    <!-- CALORIES -->
+    <section id="caloriesScreen" class="screen">
+
+        <div class="top-bar">
+            <button class="back-button" onclick="showScreen('homeScreen')">
+                ← חזרה
+            </button>
+
+            <h1 class="page-title">היום שלי 🔥</h1>
+        </div>
+
+        <div class="card">
+            <div class="label">קלוריות שאכלתי היום</div>
+            <div id="caloriesBig" class="main-number">0</div>
+            <div class="subtitle">לפי המוצרים שהוספת</div>
+        </div>
+
+        <div class="card">
+            <div class="label">חלבון שאכלתי היום</div>
+            <div id="proteinBig" class="main-number">0 ג׳</div>
+        </div>
+
+        <button class="primary-button" onclick="showScreen('foodScreen')">
+            + הוספת אוכל
         </button>
 
-        <button class="menu-button">
-            <span class="menu-icon">🥗</span>
-            האוכל שלי
-        </button>
+    </section>
 
-        <button class="menu-button">
-            <span class="menu-icon">📊</span>
-            ההתקדמות שלי
-        </button>
+
+    <!-- PROGRESS -->
+    <section id="progressScreen" class="screen">
+
+        <div class="top-bar">
+            <button class="back-button" onclick="showScreen('homeScreen')">
+                ← חזרה
+            </button>
+
+            <h1 class="page-title">ההתקדמות שלי 📊</h1>
+        </div>
+
+        <div class="card">
+            <div class="label">משקל התחלתי</div>
+            <div class="main-number">104.7 ק״ג</div>
+        </div>
+
+        <div class="card">
+            <div class="label">יעד קרוב</div>
+            <div class="main-number">95 ק״ג</div>
+        </div>
+
+        <div class="card">
+            <div class="label">שקילה אחרונה</div>
+            <div id="progressCurrentWeight" class="main-number">
+                עדיין אין שקילה
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ADD PRODUCT MODAL -->
+
+<div id="productModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>הוספת מוצר 🧺</h2>
+
+        <p class="subtitle">
+            הנתונים הם עבור 100 גרם מהמוצר.
+        </p>
+
+        <label>שם המוצר</label>
+        <input id="productName" type="text" placeholder="לדוגמה: קוטג׳ 5% תנובה">
+
+        <label>קלוריות ל־100 גרם</label>
+        <input id="productCalories" type="number" step="0.1" placeholder="לדוגמה: 98">
+
+        <label>חלבון ל־100 גרם</label>
+        <input id="productProtein" type="number" step="0.1" placeholder="לדוגמה: 11">
+
+        <div class="modal-buttons">
+
+            <button class="cancel-button" onclick="closeModal('productModal')">
+                ביטול
+            </button>
+
+            <button class="primary-button" onclick="saveProduct()">
+                שמירת מוצר
+            </button>
+
+        </div>
+
     </div>
 
 </div>
 
-<div class="nav">
-    <div class="nav-item">
-        <span class="nav-icon">🏠</span>
-        בית
+
+<!-- ADD AMOUNT MODAL -->
+
+<div id="amountModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2 id="amountProductName">מוצר</h2>
+
+        <p class="subtitle">
+            כמה גרם אכלת?
+        </p>
+
+        <input id="amountInput" type="number" step="1" placeholder="לדוגמה: 150">
+
+        <div id="calculatedInfo" class="notice">
+            הזיני כמות כדי לראות את החישוב.
+        </div>
+
+        <div class="modal-buttons">
+
+            <button class="cancel-button" onclick="closeModal('amountModal')">
+                ביטול
+            </button>
+
+            <button class="primary-button" onclick="addFoodToToday()">
+                הוספה להיום
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="nav-item">
-        <span class="nav-icon">⚖️</span>
-        משקל
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">🍽️</span>
-        אוכל
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">📊</span>
-        התקדמות
-    </div>
 </div>
+
 
 <script>
+
     const START_WEIGHT = 104.7;
     const GOAL_WEIGHT = 95;
 
-    const savedWeights =
-        JSON.parse(localStorage.getItem("weightEntries")) || [];
+    let products = JSON.parse(localStorage.getItem("myProducts")) || [];
+    let todayFood = JSON.parse(localStorage.getItem("todayFood")) || [];
+    let weights = JSON.parse(localStorage.getItem("myWeights")) || [];
 
-    if (savedWeights.length > 0) {
+    let selectedProductId = null;
 
-        const latest =
-            savedWeights[savedWeights.length - 1];
 
-        const currentWeight =
-            Number(latest.weight);
+    function saveData() {
+        localStorage.setItem("myProducts", JSON.stringify(products));
+        localStorage.setItem("todayFood", JSON.stringify(todayFood));
+        localStorage.setItem("myWeights", JSON.stringify(weights));
+    }
+
+
+    function showScreen(screenId) {
+
+        document.querySelectorAll(".screen").forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+        document.getElementById(screenId).classList.add("active");
+
+        if (screenId === "foodScreen") {
+            renderProducts();
+            renderTodayFood();
+        }
+
+        if (screenId === "weightScreen") {
+            renderWeights();
+        }
+
+        updateAll();
+    }
+
+
+    function openAddProductModal() {
+
+        document.getElementById("productName").value = "";
+        document.getElementById("productCalories").value = "";
+        document.getElementById("productProtein").value = "";
+
+        document.getElementById("productModal").classList.add("active");
+    }
+
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove("active");
+    }
+
+
+    function saveProduct() {
+
+        const name = document.getElementById("productName").value.trim();
+        const calories = parseFloat(document.getElementById("productCalories").value);
+        const protein = parseFloat(document.getElementById("productProtein").value);
+
+        if (!name || isNaN(calories) || isNaN(protein)) {
+            alert("צריך למלא שם מוצר, קלוריות וחלבון.");
+            return;
+        }
+
+        const product = {
+            id: Date.now(),
+            name: name,
+            calories: calories,
+            protein: protein
+        };
+
+        products.push(product);
+
+        saveData();
+
+        closeModal("productModal");
+
+        renderProducts();
+    }
+
+
+    function renderProducts() {
+
+        const container = document.getElementById("productsList");
+
+        if (products.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-message">
+                    עדיין אין מוצרים.<br>
+                    הוסיפי את המוצר הראשון שלך 🌿
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = products.map(product => `
+
+            <div class="food-item">
+
+                <div onclick="openAmountModal(${product.id})" style="flex:1;">
+
+                    <div class="food-name">
+                        ${escapeHtml(product.name)}
+                    </div>
+
+                    <div class="food-info">
+                        ${product.calories} קל׳ · ${product.protein} ג׳ חלבון ל־100 ג׳
+                    </div>
+
+                </div>
+
+                <div class="food-actions">
+
+                    <button class="danger-button"
+                        onclick="deleteProduct(${product.id})">
+                        🗑️
+                    </button>
+
+                </div>
+
+            </div>
+
+        `).join("");
+    }
+
+
+    function deleteProduct(id) {
+
+        const product = products.find(p => p.id === id);
+
+        if (!product) return;
+
+        const confirmed = confirm(
+            `למחוק את "${product.name}" מהמוצרים שלך?`
+        );
+
+        if (!confirmed) return;
+
+        products = products.filter(p => p.id !== id);
+
+        saveData();
+
+        renderProducts();
+    }
+
+
+    function openAmountModal(productId) {
+
+        selectedProductId = productId;
+
+        const product = products.find(p => p.id === productId);
+
+        if (!product) return;
+
+        document.getElementById("amountProductName").textContent =
+            product.name;
+
+        document.getElementById("amountInput").value = "";
+
+        document.getElementById("calculatedInfo").innerHTML =
+            `הנתונים ל־100 גרם: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`;
+
+        document.getElementById("amountModal").classList.add("active");
+
+        document.getElementById("amountInput").oninput =
+            updateCalculatedAmount;
+    }
+
+
+    function updateCalculatedAmount() {
+
+        const amount =
+            parseFloat(document.getElementById("amountInput").value);
+
+        const product =
+            products.find(p => p.id === selectedProductId);
+
+        if (!product || isNaN(amount) || amount <= 0) {
+
+            document.getElementById("calculatedInfo").innerHTML =
+                `הזיני כמות כדי לראות את החישוב.`;
+
+            return;
+        }
+
+        const calories =
+            (product.calories / 100) * amount;
+
+        const protein =
+            (product.protein / 100) * amount;
+
+        document.getElementById("calculatedInfo").innerHTML = `
+            <strong>${amount} גרם</strong><br><br>
+            🔥 ${calories.toFixed(1)} קלוריות<br>
+            💪 ${protein.toFixed(1)} גרם חלבון
+        `;
+    }
+
+
+    function addFoodToToday() {
+
+        const amount =
+            parseFloat(document.getElementById("amountInput").value);
+
+        const product =
+            products.find(p => p.id === selectedProductId);
+
+        if (!product || isNaN(amount) || amount <= 0) {
+
+            alert("הכניסי כמות בגרמים.");
+            return;
+        }
+
+        const calories =
+            (product.calories / 100) * amount;
+
+        const protein =
+            (product.protein / 100) * amount;
+
+        const entry = {
+            id: Date.now(),
+            productId: product.id,
+            name: product.name,
+            grams: amount,
+            calories: calories,
+            protein: protein,
+            date: getTodayKey()
+        };
+
+        todayFood.push(entry);
+
+        saveData();
+
+        closeModal("amountModal");
+
+        renderTodayFood();
+        updateAll();
+    }
+
+
+    function renderTodayFood() {
+
+        const container =
+            document.getElementById("todayFoodList");
+
+        const today = getTodayKey();
+
+        const entries =
+            todayFood.filter(item => item.date === today);
+
+        if (entries.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-message">
+                    עדיין לא הוספת אוכל להיום 🍽️
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = entries.map(item => `
+
+            <div class="today-entry">
+
+                <div>
+                    <strong>${escapeHtml(item.name)}</strong>
+
+                    <div class="food-info">
+                        ${item.grams} ג׳ ·
+                        ${item.calories.toFixed(1)} קל׳ ·
+                        ${item.protein.toFixed(1)} ג׳ חלבון
+                    </div>
+                </div>
+
+                <button class="danger-button"
+                    onclick="deleteTodayEntry(${item.id})">
+                    🗑️
+                </button>
+
+            </div>
+
+        `).join("");
+    }
+
+
+    function deleteTodayEntry(id) {
+
+        todayFood =
+            todayFood.filter(item => item.id !== id);
+
+        saveData();
+
+        renderTodayFood();
+
+        updateAll();
+    }
+
+
+    function getTodayKey() {
+
+        const date = new Date();
+
+        return date.getFullYear() + "-" +
+            String(date.getMonth() + 1).padStart(2, "0") + "-" +
+            String(date.getDate()).padStart(2, "0");
+    }
+
+
+    function calculateToday() {
+
+        const today = getTodayKey();
+
+        const entries =
+            todayFood.filter(item => item.date === today);
+
+        const calories =
+            entries.reduce((sum, item) => sum + item.calories, 0);
+
+        const protein =
+            entries.reduce((sum, item) => sum + item.protein, 0);
+
+        return {
+            calories,
+            protein
+        };
+    }
+
+
+    function updateFoodSummary() {
+
+        const totals = calculateToday();
+
+        document.getElementById("todayCalories").textContent =
+            Math.round(totals.calories);
+
+        document.getElementById("todayProtein").textContent =
+            totals.protein.toFixed(1) + " ג׳";
+
+        document.getElementById("caloriesBig").textContent =
+            Math.round(totals.calories);
+
+        document.getElementById("proteinBig").textContent =
+            totals.protein.toFixed(1) + " ג׳";
+    }
+
+
+    function addWeight() {
+
+        const value =
+            parseFloat(document.getElementById("weightInput").value);
+
+        if (isNaN(value) || value <= 0) {
+            alert("הכניסי משקל תקין.");
+            return;
+        }
+
+        const entry = {
+            id: Date.now(),
+            weight: value,
+            date: new Date().toLocaleDateString("he-IL")
+        };
+
+        weights.push(entry);
+
+        saveData();
+
+        document.getElementById("weightInput").value = "";
+
+        renderWeights();
+        updateAll();
+
+        alert("השקילה נשמרה 💚");
+    }
+
+
+    function renderWeights() {
+
+        const container =
+            document.getElementById("weightHistory");
+
+        if (weights.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-message">
+                    עדיין אין שקילות.
+                </div>
+            `;
+
+            return;
+        }
+
+        const sorted =
+            [...weights].reverse();
+
+        container.innerHTML = sorted.map(item => `
+
+            <div class="today-entry">
+
+                <div>
+                    <strong>${item.weight} ק״ג</strong>
+                    <div class="food-info">${item.date}</div>
+                </div>
+
+                <button class="danger-button"
+                    onclick="deleteWeight(${item.id})">
+                    🗑️
+                </button>
+
+            </div>
+
+        `).join("");
+    }
+
+
+    function deleteWeight(id) {
+
+        weights =
+            weights.filter(item => item.id !== id);
+
+        saveData();
+
+        renderWeights();
+        updateAll();
+    }
+
+
+    function getCurrentWeight() {
+
+        if (weights.length === 0) {
+            return null;
+        }
+
+        return weights[weights.length - 1].weight;
+    }
+
+
+    function updateHome() {
+
+        const currentWeight = getCurrentWeight();
+
+        if (currentWeight === null) {
+
+            document.getElementById("homeWeight").textContent =
+                "עדיין אין שקילה";
+
+            document.getElementById("homeWeightDate").textContent =
+                "כשתוסיפי שקילה, היא תופיע כאן";
+
+            document.getElementById("homeRemaining").textContent =
+                "מתחילים את הדרך";
+
+            document.getElementById("homeProgressText").textContent =
+                "מתחילים את הדרך 💚";
+
+            document.getElementById("homeProgressBar").style.width =
+                "0%";
+
+            document.getElementById("progressCurrentWeight").textContent =
+                "עדיין אין שקילה";
+
+            return;
+        }
+
+        const last =
+            weights[weights.length - 1];
+
+        document.getElementById("homeWeight").textContent =
+            currentWeight.toFixed(1) + " ק״ג";
+
+        document.getElementById("homeWeightDate").textContent =
+            last.date;
 
         const lost =
             START_WEIGHT - currentWeight;
 
         const remaining =
-            Math.max(currentWeight - GOAL_WEIGHT, 0);
+            currentWeight - GOAL_WEIGHT;
 
-        const totalNeeded =
+        const total =
             START_WEIGHT - GOAL_WEIGHT;
 
-        const progress =
-            Math.min(Math.max((lost / totalNeeded) * 100, 0), 100);
+        let progress =
+            (lost / total) * 100;
 
-        document.getElementById("currentWeight").textContent =
-            currentWeight.toFixed(1) + " ק״ג";
+        progress =
+            Math.max(0, Math.min(100, progress));
 
-        document.getElementById("currentDate").textContent =
-            "שקילה אחרונה: " + latest.date;
-
-        document.getElementById("remaining").textContent =
-            "נשארו " + remaining.toFixed(1) + " ק״ג";
-
-        document.getElementById("progressBar").style.width =
+        document.getElementById("homeProgressBar").style.width =
             progress + "%";
 
-        document.getElementById("progressText").textContent =
-            "ירדת " + lost.toFixed(1) +
-            " ק״ג — " + Math.round(progress) +
-            "% מהדרך למטרה 💚";
+        if (remaining > 0) {
+
+            document.getElementById("homeRemaining").textContent =
+                `נשארו ${remaining.toFixed(1)} ק״ג ליעד`;
+
+            document.getElementById("homeProgressText").textContent =
+                `כבר ירדת ${Math.max(0, lost).toFixed(1)} ק״ג 💚`;
+
+        } else {
+
+            document.getElementById("homeRemaining").textContent =
+                "הגעת ליעד! 🎉";
+
+            document.getElementById("homeProgressText").textContent =
+                "עשית את זה! 🥹💚";
+        }
+
+        document.getElementById("progressCurrentWeight").textContent =
+            currentWeight.toFixed(1) + " ק״ג";
     }
+
+
+    function updateAll() {
+
+        updateHome();
+        updateFoodSummary();
+    }
+
+
+    function escapeHtml(text) {
+
+        const div = document.createElement("div");
+
+        div.textContent = text;
+
+        return div.innerHTML;
+    }
+
+
+    updateAll();
+    renderProducts();
+    renderTodayFood();
+    renderWeights();
+
 </script>
 
 </body>
