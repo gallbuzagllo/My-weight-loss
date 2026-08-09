@@ -11,14 +11,14 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f7f2;
+    background: linear-gradient(180deg, #f1f7f2 0%, #f8faf7 45%, #f5f7f2 100%);
     color: #26332b;
 }
 
 .app {
     max-width: 600px;
     margin: auto;
-    padding: 20px 16px 40px;
+    padding: 18px 16px 50px;
 }
 
 .screen { display: none; }
@@ -26,29 +26,38 @@ body {
 
 .greeting {
     text-align: center;
-    margin: 15px 0 20px;
+    margin: 12px 0 20px;
 }
 
 .greeting h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
+    font-size: 34px;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
 }
 
-.greeting p { color: #718078; }
+.greeting p {
+    color: #718078;
+    margin: 0;
+    font-size: 15px;
+}
+
+/* DAILY QUOTE */
 
 .daily-quote {
-    background: #dfeee3;
-    border-radius: 24px;
+    background: linear-gradient(135deg, #dceee1, #edf6ee);
+    border-radius: 28px;
     padding: 28px 22px;
     text-align: center;
     margin-bottom: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 25px rgba(67, 94, 73, 0.08);
+    border: 1px solid rgba(125,168,137,0.15);
 }
 
 .quote-label {
-    font-size: 14px;
+    font-size: 15px;
     color: #66806d;
     margin-bottom: 12px;
+    font-weight: bold;
 }
 
 .quote {
@@ -57,22 +66,36 @@ body {
     line-height: 1.5;
 }
 
-.card {
-    background: white;
-    border-radius: 22px;
-    padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+/* HOME CARDS */
+
+.home-card {
+    background: rgba(255,255,255,0.92);
+    border-radius: 24px;
+    padding: 21px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.045);
+    border: 1px solid rgba(220,227,222,0.7);
 }
 
-.label {
-    font-size: 14px;
-    color: #718078;
-    margin-bottom: 8px;
+.home-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.home-card-title {
+    font-size: 15px;
+    color: #647168;
+    font-weight: bold;
+}
+
+.home-card-icon {
+    font-size: 24px;
 }
 
 .main-number {
-    font-size: 34px;
+    font-size: 36px;
     font-weight: bold;
 }
 
@@ -99,9 +122,9 @@ body {
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: #7da889;
+    background: linear-gradient(90deg, #70977b, #9abc9f);
     border-radius: 20px;
-    transition: 0.4s;
+    transition: 0.5s;
 }
 
 .progress-text {
@@ -110,6 +133,78 @@ body {
     font-size: 14px;
     color: #718078;
 }
+
+/* START INFO */
+
+.start-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.start-box {
+    background: #f6f8f5;
+    border-radius: 16px;
+    padding: 13px;
+}
+
+.start-box .subtitle {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* DAILY SUMMARY */
+
+.daily-summary {
+    background: linear-gradient(135deg, #fffdf6, #f9f7ed);
+    border-radius: 24px;
+    padding: 21px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.04);
+    border: 1px solid #eee9d7;
+}
+
+.daily-summary h2 {
+    margin: 0 0 5px;
+    font-size: 22px;
+}
+
+.summary-intro {
+    color: #7a817b;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.summary-item {
+    background: rgba(255,255,255,0.75);
+    border-radius: 16px;
+    padding: 13px 14px;
+    margin-bottom: 9px;
+    line-height: 1.5;
+}
+
+.summary-item:last-child {
+    margin-bottom: 0;
+}
+
+.summary-good {
+    border-right: 4px solid #7da889;
+}
+
+.summary-improve {
+    border-right: 4px solid #d8b66b;
+}
+
+.summary-neutral {
+    border-right: 4px solid #aeb9b1;
+}
+
+.summary-item-title {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+/* MENU */
 
 .menu {
     display: grid;
@@ -120,17 +215,38 @@ body {
 .menu-button {
     border: none;
     background: white;
-    border-radius: 20px;
-    padding: 20px 10px;
+    border-radius: 22px;
+    padding: 21px 10px;
     font-size: 16px;
     color: #26332b;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.045);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.menu-button:active {
+    transform: scale(0.97);
 }
 
 .menu-icon {
     display: block;
     font-size: 30px;
+    margin-bottom: 8px;
+}
+
+/* OTHER SCREENS */
+
+.card {
+    background: white;
+    border-radius: 22px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.label {
+    font-size: 14px;
+    color: #718078;
     margin-bottom: 8px;
 }
 
@@ -356,26 +472,38 @@ label {
 
     <div class="greeting">
         <h1>המסע שלי 🌿</h1>
-        <p>כל צעד קטן הוא התקדמות.</p>
+        <p>לאט, בקצב שלי, צעד אחרי צעד.</p>
     </div>
 
     <div class="daily-quote">
-        <div class="quote-label">✨ המשפט שלי להיום</div>
-        <div class="quote">
-            אני לא צריכה להיות מושלמת. אני רק צריכה להמשיך.
-        </div>
+        <div class="quote-label">✨ המשפט היומי 😃</div>
+        <div id="dailyQuote" class="quote"></div>
     </div>
 
-    <div class="card">
-        <div class="label">המשקל הנוכחי</div>
-        <div id="homeWeight" class="main-number">עדיין אין שקילה</div>
+    <div class="home-card">
+
+        <div class="home-card-header">
+            <div class="home-card-title">המשקל הנוכחי</div>
+            <div class="home-card-icon">⚖️</div>
+        </div>
+
+        <div id="homeWeight" class="main-number">
+            עדיין אין שקילה
+        </div>
+
         <div id="homeWeightDate" class="subtitle">
             כשתוסיפי שקילה, היא תופיע כאן
         </div>
+
     </div>
 
-    <div class="card">
-        <div class="label">המטרה הקרובה 🎯</div>
+    <div class="home-card">
+
+        <div class="home-card-header">
+            <div class="home-card-title">המטרה הקרובה</div>
+            <div class="home-card-icon">🎯</div>
+        </div>
+
         <div class="goal-number">95 ק״ג</div>
 
         <div id="homeRemaining" class="subtitle">
@@ -389,22 +517,44 @@ label {
         <div id="homeProgressText" class="progress-text">
             מתחילים את הדרך 💚
         </div>
+
     </div>
 
-    <div class="card">
-        <div class="label">תחילת התהליך</div>
+    <div class="home-card">
 
-        <div style="display:flex; justify-content:space-between;">
-            <div>
+        <div class="home-card-header">
+            <div class="home-card-title">תחילת התהליך</div>
+            <div class="home-card-icon">🌱</div>
+        </div>
+
+        <div class="start-info">
+
+            <div class="start-box">
                 <div class="subtitle">משקל התחלתי</div>
                 <strong>104.7 ק״ג</strong>
             </div>
 
-            <div>
+            <div class="start-box">
                 <div class="subtitle">תאריך התחלה</div>
                 <strong>10/04/2026</strong>
             </div>
+
         </div>
+
+    </div>
+
+    <!-- DAILY SUMMARY -->
+
+    <div class="daily-summary">
+
+        <h2>סיכום היום 🌙</h2>
+
+        <div class="summary-intro">
+            רגע קטן לעצור, להסתכל על היום ולהמשיך למחר.
+        </div>
+
+        <div id="dailySummaryContent"></div>
+
     </div>
 
     <div class="menu">
@@ -419,12 +569,6 @@ label {
                 onclick="showScreen('foodScreen')">
             <span class="menu-icon">🥗</span>
             האוכל שלי
-        </button>
-
-        <button class="menu-button"
-                onclick="showScreen('caloriesScreen')">
-            <span class="menu-icon">🔥</span>
-            קלוריות וחלבון
         </button>
 
         <button class="menu-button"
@@ -477,7 +621,6 @@ label {
 
     </div>
 
-
     <button class="primary-button"
             onclick="openMealBuilder()">
         + הרכבת ארוחה
@@ -489,20 +632,17 @@ label {
         + הוספת מוצר בודד
     </button>
 
-
     <h2 class="section-title">
         מה אכלתי היום 🍽️
     </h2>
 
     <div id="todayMeals"></div>
 
-
     <h2 class="section-title">
         הארוחות שלי ⭐
     </h2>
 
     <div id="savedMeals"></div>
-
 
     <h2 class="section-title">
         המוצרים שלי 🧺
@@ -697,7 +837,6 @@ label {
 
     </select>
 
-
     <div id="gramFields">
 
         <label>קלוריות ל־100 גרם</label>
@@ -719,7 +858,6 @@ label {
         >
 
     </div>
-
 
     <div id="unitFields"
          style="display:none;">
@@ -743,7 +881,6 @@ label {
         >
 
     </div>
-
 
     <div class="modal-buttons">
 
@@ -902,6 +1039,27 @@ label {
 const START_WEIGHT = 104.7;
 const GOAL_WEIGHT = 95;
 
+
+/* משפטים יומיים */
+
+const dailyQuotes = [
+    "אני לא צריכה להיות מושלמת. אני רק צריכה להמשיך.",
+    "כל בחירה טובה היום היא מתנה שאני נותנת לעצמי.",
+    "אני מתקדמת גם כשאני לא רואה את זה מיד.",
+    "יום אחד לא קובע את כל הדרך שלי.",
+    "אני בונה הרגלים, לא מחפשת קסמים.",
+    "אני יכולה להיות גאה בעצמי גם על צעדים קטנים.",
+    "הדרך שלי היא שלי, ואני לא צריכה להשוות אותה לאחרים.",
+    "אני לא מוותרת על עצמי.",
+    "גם היום אני בוחרת לעשות משהו טוב בשבילי.",
+    "התקדמות אמיתית נבנית לאט ובסבלנות.",
+    "אני חזקה יותר ממה שאני חושבת.",
+    "לא צריך יום מושלם כדי שיהיה יום טוב.",
+    "אני ממשיכה. בקצב שלי. בדרך שלי. 💚",
+    "אני כאן בשביל התהליך, לא רק בשביל התוצאה."
+];
+
+
 let products =
     JSON.parse(localStorage.getItem("myProducts")) || [];
 
@@ -920,6 +1078,22 @@ let selectedProductId = null;
 
 let amountForMeal = false;
 
+
+/* משפט אקראי בכל פתיחה */
+
+function setDailyQuote() {
+
+    const quote =
+        dailyQuotes[
+            Math.floor(Math.random() * dailyQuotes.length)
+        ];
+
+    document.getElementById("dailyQuote")
+        .textContent = quote;
+}
+
+
+/* שמירת נתונים */
 
 function saveData() {
 
@@ -1362,7 +1536,6 @@ function confirmAmount() {
         protein = product.protein * amount / 100;
     }
 
-
     if (amountForMeal) {
 
         currentMeal.push({
@@ -1382,7 +1555,6 @@ function confirmAmount() {
 
         return;
     }
-
 
     todayMeals.push({
 
@@ -1415,7 +1587,7 @@ function confirmAmount() {
 
     renderTodayMeals();
 
-    updateFoodSummary();
+    updateAll();
 }
 
 
@@ -1484,7 +1656,6 @@ function renderCurrentMeal() {
 
             }).join("");
     }
-
 
     const calories =
         currentMeal.reduce(
@@ -1573,7 +1744,7 @@ function saveMeal(addToToday) {
 
     renderSavedMeals();
     renderTodayMeals();
-    updateFoodSummary();
+    updateAll();
 }
 
 
@@ -1690,7 +1861,7 @@ function addSavedMealToToday(id) {
 
     renderTodayMeals();
 
-    updateFoodSummary();
+    updateAll();
 }
 
 
@@ -1788,7 +1959,7 @@ function deleteTodayMeal(id) {
 
     renderTodayMeals();
 
-    updateFoodSummary();
+    updateAll();
 }
 
 
@@ -2026,7 +2197,7 @@ function addQuickFood() {
 
     renderTodayMeals();
 
-    updateFoodSummary();
+    updateAll();
 }
 
 
@@ -2087,6 +2258,118 @@ function updateFoodSummary() {
     document.getElementById("proteinBig")
         .textContent =
         totals.protein.toFixed(1) + " ג׳";
+}
+
+
+/* סיכום היום */
+
+function updateDailySummary() {
+
+    const container =
+        document.getElementById("dailySummaryContent");
+
+    const today =
+        todayMeals.filter(
+            meal => meal.date === getTodayKey()
+        );
+
+    const totals =
+        calculateToday();
+
+    const weighedToday =
+        weights.some(weight =>
+            weight.date === new Date().toLocaleDateString("he-IL")
+        );
+
+    let html = "";
+
+    if (today.length > 0) {
+
+        html += `
+            <div class="summary-item summary-good">
+                <div class="summary-item-title">
+                    🌿 מה היה טוב היום?
+                </div>
+                תיעדת ${today.length} ${today.length === 1 ? "פריט/ארוחה" : "ארוחות או מוצרים"} באוכל שלך.
+                עצם המעקב והמודעות הם חלק חשוב מהתהליך.
+            </div>
+        `;
+
+        html += `
+            <div class="summary-item summary-good">
+                <div class="summary-item-title">
+                    🍽️ מה אכלת היום?
+                </div>
+                עד עכשיו תיעדת ${Math.round(totals.calories)} קלוריות
+                ו־${totals.protein.toFixed(1)} ג׳ חלבון.
+            </div>
+        `;
+
+    } else {
+
+        html += `
+            <div class="summary-item summary-neutral">
+                <div class="summary-item-title">
+                    🌱 עדיין אין מספיק מידע על היום
+                </div>
+                אם תרצי, תוכלי להוסיף את הארוחות שלך ב"אוכל שלי",
+                ואז הסיכום יוכל לתת לך תמונה טובה יותר של היום.
+            </div>
+        `;
+    }
+
+    if (weighedToday) {
+
+        html += `
+            <div class="summary-item summary-good">
+                <div class="summary-item-title">
+                    ⚖️ עוד נקודה טובה
+                </div>
+                תיעדת שקילה היום. מעקב עקבי עוזר לראות את התהליך לאורך זמן,
+                ולא רק יום בודד.
+            </div>
+        `;
+
+    } else {
+
+        html += `
+            <div class="summary-item summary-neutral">
+                <div class="summary-item-title">
+                    ⚖️ השקילה לא חייבת להיות כל יום
+                </div>
+                אין צורך להישקל היום אם זה לא יום השקילה שלך.
+                העיקר הוא להסתכל על המגמה לאורך זמן.
+            </div>
+        `;
+    }
+
+    if (today.length > 0) {
+
+        html += `
+            <div class="summary-item summary-improve">
+                <div class="summary-item-title">
+                    🌙 משהו קטן למחר
+                </div>
+                מחר אפשר להמשיך בדיוק מאותה נקודה —
+                לתעד את מה שאת אוכלת, לשים לב לרעב ולשובע,
+                ולזכור שלא צריך להיות מושלם כדי להתקדם.
+            </div>
+        `;
+
+    } else {
+
+        html += `
+            <div class="summary-item summary-improve">
+                <div class="summary-item-title">
+                    🌙 משהו קטן למחר
+                </div>
+                נסי להתחיל את היום בלי לחץ.
+                בחירה אחת טובה בכל פעם היא מספיק טובה.
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
 }
 
 
@@ -2212,6 +2495,21 @@ function updateHome() {
             .textContent =
             "כשתוסיפי שקילה, היא תופיע כאן";
 
+        document.getElementById("homeProgressBar")
+            .style.width = "0%";
+
+        document.getElementById("homeRemaining")
+            .textContent =
+            "מתחילים את הדרך";
+
+        document.getElementById("homeProgressText")
+            .textContent =
+            "מתחילים את הדרך 💚";
+
+        document.getElementById("progressCurrentWeight")
+            .textContent =
+            "עדיין אין שקילה";
+
         return;
     }
 
@@ -2224,7 +2522,7 @@ function updateHome() {
 
     document.getElementById("homeWeightDate")
         .textContent =
-        last.date;
+        "שקילה אחרונה: " + last.date;
 
     const lost =
         START_WEIGHT - current;
@@ -2277,6 +2575,8 @@ function updateAll() {
     updateHome();
 
     updateFoodSummary();
+
+    updateDailySummary();
 }
 
 
@@ -2291,10 +2591,18 @@ function escapeHtml(text) {
 }
 
 
+/* הפעלה ראשונית */
+
+setDailyQuote();
+
 updateAll();
+
 renderProducts();
+
 renderSavedMeals();
+
 renderTodayMeals();
+
 renderWeights();
 
 </script>
