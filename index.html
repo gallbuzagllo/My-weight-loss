@@ -200,7 +200,8 @@ body {
     cursor: pointer;
 }
 
-input {
+input,
+select {
     width: 100%;
     padding: 14px;
     border: 1px solid #dce3de;
@@ -209,6 +210,7 @@ input {
     margin-top: 6px;
     margin-bottom: 14px;
     direction: rtl;
+    background: white;
 }
 
 label {
@@ -272,6 +274,7 @@ label {
 .food-actions {
     display: flex;
     gap: 6px;
+    flex-wrap: wrap;
 }
 
 .empty-message {
@@ -359,6 +362,51 @@ label {
     cursor: pointer;
 }
 
+.unit-choice {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.unit-choice button {
+    border: 1px solid #dce3de;
+    background: #f7f9f7;
+    padding: 12px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #45604d;
+}
+
+.unit-choice button.selected {
+    background: #dfeee3;
+    border-color: #70977b;
+    font-weight: bold;
+}
+
+.type-badge {
+    display: inline-block;
+    background: #edf2ee;
+    color: #56705d;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.today-entry.single-item {
+    border-right: 4px solid #9bb7a1;
+}
+
+.today-entry.meal-entry {
+    border-right: 4px solid #70977b;
+}
+
+.added-label {
+    font-size: 12px;
+    color: #7c8780;
+    margin-bottom: 5px;
+}
 </style>
 </head>
 
@@ -536,9 +584,17 @@ label {
 
 
     <button class="primary-button"
+            onclick="openSingleFoodModal()">
+
+        + הוספת אוכל בודד
+
+    </button>
+
+    <button class="secondary-button"
+            style="width:100%; margin-top:10px;"
             onclick="openMealBuilder()">
 
-        + הרכבת ארוחה
+        🍽️ הרכבת ארוחה
 
     </button>
 
@@ -579,7 +635,8 @@ label {
     <div class="notice">
 
         המוצרים מסודרים אוטומטית לפי א״ב.
-        כל מוצר נשמר לשימוש חוזר.
+        לכל מוצר אפשר לבחור אם לתעד אותו בגרמים,
+        יחידות או מ״ל.
 
     </div>
 
@@ -779,30 +836,63 @@ label {
     <input
         id="productName"
         type="text"
-        placeholder="לדוגמה: קוטג׳ 5%"
+        placeholder="לדוגמה: ופלה"
     >
 
     <label>
-        קלוריות ל־100 גרם
+        איך תרצי למדוד את המוצר?
     </label>
 
-    <input
-        id="productCalories"
-        type="number"
-        step="0.1"
-        placeholder="לדוגמה: 98"
-    >
+    <div class="unit-choice">
 
-    <label>
-        חלבון ל־100 גרם
-    </label>
+        <button id="unitGrams"
+                onclick="selectProductUnit('grams')">
 
-    <input
-        id="productProtein"
-        type="number"
-        step="0.1"
-        placeholder="לדוגמה: 11"
-    >
+            ⚖️ גרמים
+
+        </button>
+
+        <button id="unitUnits"
+                onclick="selectProductUnit('units')">
+
+            🔢 יחידות
+
+        </button>
+
+        <button id="unitMl"
+                onclick="selectProductUnit('ml')">
+
+            🥛 מ״ל
+
+        </button>
+
+    </div>
+
+    <div id="productNutritionLabels">
+
+        <label>
+            קלוריות ל־100 גרם
+        </label>
+
+        <input
+            id="productCalories"
+            type="number"
+            step="0.1"
+            placeholder="לדוגמה: 98"
+        >
+
+        <label>
+            חלבון ל־100 גרם
+        </label>
+
+        <input
+            id="productProtein"
+            type="number"
+            step="0.1"
+            placeholder="לדוגמה: 11"
+        >
+
+    </div>
 
     <div class="modal-buttons">
 
@@ -817,6 +907,132 @@ label {
                 onclick="saveProduct()">
 
             שמירת מוצר
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- AMOUNT MODAL -->
+
+<div id="amountModal" class="modal">
+
+<div class="modal-content">
+
+    <h2 id="amountProductName">
+        מוצר
+    </h2>
+
+    <label id="amountLabel">
+        כמה?
+    </label>
+
+    <input
+        id="amountInput"
+        type="number"
+        step="0.1"
+        placeholder="לדוגמה: 2"
+    >
+
+    <div id="amountCalculation"
+         class="notice">
+
+        הזיני כמות.
+
+    </div>
+
+    <div class="modal-buttons">
+
+        <button class="cancel-button"
+                onclick="closeModal('amountModal')">
+
+            ביטול
+
+        </button>
+
+        <button class="primary-button"
+                onclick="confirmAmount()">
+
+            הוספה
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- SINGLE FOOD MODAL -->
+
+<div id="singleFoodModal" class="modal">
+
+<div class="modal-content">
+
+    <h2>
+        הוספת אוכל בודד 🍫
+    </h2>
+
+    <div class="notice">
+        לא כל דבר חייב להיות ארוחה 😊
+        בחרי מוצר, כמות, והוא ייכנס ישר לסיכום של היום.
+    </div>
+
+    <label>
+        בחירת מוצר
+    </label>
+
+    <select id="singleProductSelect"
+            onchange="prepareSingleFood()">
+
+        <option value="">
+            בחרי מוצר...
+        </option>
+
+    </select>
+
+    <div id="singleFoodAmountArea"
+         style="display:none;">
+
+        <label id="singleAmountLabel">
+            כמות
+        </label>
+
+        <input
+            id="singleAmountInput"
+            type="number"
+            step="0.1"
+            placeholder="לדוגמה: 2"
+            oninput="calculateSingleFood()"
+        >
+
+        <div id="singleFoodCalculation"
+             class="notice">
+
+            הזיני כמות.
+
+        </div>
+
+    </div>
+
+    <div class="modal-buttons">
+
+        <button class="cancel-button"
+                onclick="closeModal('singleFoodModal')">
+
+            ביטול
+
+        </button>
+
+        <button class="primary-button"
+                onclick="addSingleFood()">
+
+            הוספה להיום
 
         </button>
 
@@ -898,57 +1114,6 @@ label {
 </div>
 
 
-<!-- PRODUCT AMOUNT MODAL -->
-
-<div id="amountModal" class="modal">
-
-<div class="modal-content">
-
-    <h2 id="amountProductName">
-        מוצר
-    </h2>
-
-    <label>
-        כמה גרם?
-    </label>
-
-    <input
-        id="amountInput"
-        type="number"
-        step="1"
-        placeholder="לדוגמה: 150"
-    >
-
-    <div id="amountCalculation"
-         class="notice">
-
-        הזיני כמות.
-
-    </div>
-
-    <div class="modal-buttons">
-
-        <button class="cancel-button"
-                onclick="closeModal('amountModal')">
-
-            ביטול
-
-        </button>
-
-        <button class="primary-button"
-                onclick="addProductToMeal()">
-
-            הוספה לארוחה
-
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-
 <script>
 
 const START_WEIGHT = 104.7;
@@ -967,9 +1132,29 @@ let weights =
     JSON.parse(localStorage.getItem("myWeights")) || [];
 
 let currentMeal = [];
-
 let selectedProductId = null;
+let selectedProductUnit = "grams";
+let amountForMeal = false;
 
+
+/* ---------------------------------
+   התאמה למוצרים ישנים
+--------------------------------- */
+
+products = products.map(product => {
+
+    if (!product.unitType) {
+        product.unitType = "grams";
+    }
+
+    return product;
+
+});
+
+
+/* ---------------------------------
+   שמירה
+--------------------------------- */
 
 function saveData() {
 
@@ -994,6 +1179,10 @@ function saveData() {
     );
 }
 
+
+/* ---------------------------------
+   מסכים
+--------------------------------- */
 
 function showScreen(id) {
 
@@ -1027,14 +1216,164 @@ function closeModal(id) {
 }
 
 
+/* ---------------------------------
+   יחידות
+--------------------------------- */
+
+function getUnitLabel(unitType) {
+
+    if (unitType === "units")
+        return "יח׳";
+
+    if (unitType === "ml")
+        return "מ״ל";
+
+    return "ג׳";
+}
+
+
+function getUnitName(unitType) {
+
+    if (unitType === "units")
+        return "יחידות";
+
+    if (unitType === "ml")
+        return "מ״ל";
+
+    return "גרמים";
+}
+
+
+/* ---------------------------------
+   מוצר חדש
+--------------------------------- */
+
 function openProductModal() {
 
     document.getElementById("productName").value = "";
     document.getElementById("productCalories").value = "";
     document.getElementById("productProtein").value = "";
 
+    selectProductUnit("grams");
+
     document.getElementById("productModal")
         .classList.add("active");
+}
+
+
+function selectProductUnit(unitType) {
+
+    selectedProductUnit = unitType;
+
+    document
+        .querySelectorAll(".unit-choice button")
+        .forEach(button => {
+            button.classList.remove("selected");
+        });
+
+    if (unitType === "grams") {
+        document.getElementById("unitGrams")
+            .classList.add("selected");
+    }
+
+    if (unitType === "units") {
+        document.getElementById("unitUnits")
+            .classList.add("selected");
+    }
+
+    if (unitType === "ml") {
+        document.getElementById("unitMl")
+            .classList.add("selected");
+    }
+
+    const labels =
+        document.getElementById("productNutritionLabels");
+
+    if (unitType === "units") {
+
+        labels.innerHTML = `
+
+            <label>
+                קלוריות ליחידה
+            </label>
+
+            <input
+                id="productCalories"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 120"
+            >
+
+            <label>
+                חלבון ליחידה
+            </label>
+
+            <input
+                id="productProtein"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 2"
+            >
+
+        `;
+
+    } else if (unitType === "ml") {
+
+        labels.innerHTML = `
+
+            <label>
+                קלוריות ל־100 מ״ל
+            </label>
+
+            <input
+                id="productCalories"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 45"
+            >
+
+            <label>
+                חלבון ל־100 מ״ל
+            </label>
+
+            <input
+                id="productProtein"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 3.2"
+            >
+
+        `;
+
+    } else {
+
+        labels.innerHTML = `
+
+            <label>
+                קלוריות ל־100 גרם
+            </label>
+
+            <input
+                id="productCalories"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 98"
+            >
+
+            <label>
+                חלבון ל־100 גרם
+            </label>
+
+            <input
+                id="productProtein"
+                type="number"
+                step="0.1"
+                placeholder="לדוגמה: 11"
+            >
+
+        `;
+
+    }
 }
 
 
@@ -1069,7 +1408,9 @@ function saveProduct() {
 
         calories,
 
-        protein
+        protein,
+
+        unitType: selectedProductUnit
 
     });
 
@@ -1080,6 +1421,10 @@ function saveProduct() {
     renderProducts();
 }
 
+
+/* ---------------------------------
+   הצגת מוצרים
+--------------------------------- */
 
 function renderProducts() {
 
@@ -1117,45 +1462,61 @@ function renderProducts() {
     }
 
     container.innerHTML =
-        filtered.map(product => `
+        filtered.map(product => {
 
-        <div class="food-item">
+            const unitLabel =
+                getUnitLabel(product.unitType);
 
-            <div>
+            const nutritionLabel =
+                product.unitType === "units"
+                    ? "ליחידה"
+                    : `ל־100 ${unitLabel}`;
 
-                <div class="food-name">
-                    ${escapeHtml(product.name)}
+            return `
+
+            <div class="food-item">
+
+                <div>
+
+                    <div class="food-name">
+                        ${escapeHtml(product.name)}
+                    </div>
+
+                    <div class="food-info">
+                        ${product.calories} קל׳ ·
+                        ${product.protein} ג׳ חלבון
+                        ${nutritionLabel}
+                    </div>
+
+                    <div class="type-badge">
+                        ${getUnitName(product.unitType)}
+                    </div>
+
                 </div>
 
-                <div class="food-info">
-                    ${product.calories} קל׳ ·
-                    ${product.protein} ג׳ חלבון
-                    ל־100 ג׳
+                <div class="food-actions">
+
+                    <button class="small-action"
+                            onclick="openProductAmount(${product.id}, false)">
+
+                        ➕
+
+                    </button>
+
+                    <button class="danger-button"
+                            onclick="deleteProduct(${product.id})">
+
+                        🗑️
+
+                    </button>
+
                 </div>
 
             </div>
 
-            <div class="food-actions">
+            `;
 
-                <button class="small-action"
-                        onclick="openProductAmount(${product.id})">
-
-                    ➕
-
-                </button>
-
-                <button class="danger-button"
-                        onclick="deleteProduct(${product.id})">
-
-                    🗑️
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
+        }).join("");
 }
 
 
@@ -1178,6 +1539,229 @@ function deleteProduct(id) {
     renderProducts();
 }
 
+
+/* ---------------------------------
+   חישוב מוצר לפי כמות
+--------------------------------- */
+
+function calculateProductNutrition(product, amount) {
+
+    if (product.unitType === "units") {
+
+        return {
+            calories: product.calories * amount,
+            protein: product.protein * amount
+        };
+
+    }
+
+    return {
+        calories: product.calories * amount / 100,
+        protein: product.protein * amount / 100
+    };
+}
+
+
+/* ---------------------------------
+   הוספת מוצר בודד
+--------------------------------- */
+
+function openSingleFoodModal() {
+
+    const select =
+        document.getElementById("singleProductSelect");
+
+    const sorted =
+        [...products].sort((a,b) =>
+            a.name.localeCompare(b.name,"he")
+        );
+
+    select.innerHTML = `
+
+        <option value="">
+            בחרי מוצר...
+        </option>
+
+        ${sorted.map(product => `
+
+            <option value="${product.id}">
+                ${escapeHtml(product.name)}
+            </option>
+
+        `).join("")}
+
+    `;
+
+    document.getElementById("singleFoodAmountArea")
+        .style.display = "none";
+
+    document.getElementById("singleAmountInput")
+        .value = "";
+
+    document.getElementById("singleFoodCalculation")
+        .innerHTML = "הזיני כמות.";
+
+    document.getElementById("singleFoodModal")
+        .classList.add("active");
+}
+
+
+function prepareSingleFood() {
+
+    const id =
+        parseInt(
+            document.getElementById("singleProductSelect").value
+        );
+
+    const area =
+        document.getElementById("singleFoodAmountArea");
+
+    if (!id) {
+
+        area.style.display = "none";
+
+        return;
+    }
+
+    const product =
+        products.find(p => p.id === id);
+
+    if (!product) return;
+
+    area.style.display = "block";
+
+    document.getElementById("singleAmountLabel")
+        .textContent =
+        `כמה ${getUnitName(product.unitType)}?`;
+
+    document.getElementById("singleAmountInput")
+        .placeholder =
+        product.unitType === "units"
+            ? "לדוגמה: 2"
+            : "לדוגמה: 150";
+
+    document.getElementById("singleAmountInput")
+        .value = "";
+
+    document.getElementById("singleFoodCalculation")
+        .innerHTML =
+        product.unitType === "units"
+            ? `ליחידה: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`
+            : `ל־100 ${getUnitLabel(product.unitType)}: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`;
+}
+
+
+function calculateSingleFood() {
+
+    const id =
+        parseInt(
+            document.getElementById("singleProductSelect").value
+        );
+
+    const amount =
+        parseFloat(
+            document.getElementById("singleAmountInput").value
+        );
+
+    const product =
+        products.find(p => p.id === id);
+
+    if (!product || isNaN(amount) || amount <= 0) {
+
+        document.getElementById("singleFoodCalculation")
+            .innerHTML =
+            "הזיני כמות.";
+
+        return;
+    }
+
+    const nutrition =
+        calculateProductNutrition(product, amount);
+
+    document.getElementById("singleFoodCalculation")
+        .innerHTML = `
+
+            <strong>
+                ${amount} ${getUnitLabel(product.unitType)}
+            </strong>
+
+            <br><br>
+
+            🔥 ${nutrition.calories.toFixed(1)} קלוריות
+
+            <br>
+
+            💪 ${nutrition.protein.toFixed(1)} ג׳ חלבון
+
+        `;
+}
+
+
+function addSingleFood() {
+
+    const id =
+        parseInt(
+            document.getElementById("singleProductSelect").value
+        );
+
+    const amount =
+        parseFloat(
+            document.getElementById("singleAmountInput").value
+        );
+
+    const product =
+        products.find(p => p.id === id);
+
+    if (!product) {
+
+        alert("בחרי מוצר.");
+
+        return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
+
+        alert("הכניסי כמות.");
+
+        return;
+    }
+
+    const nutrition =
+        calculateProductNutrition(product, amount);
+
+    todayMeals.push({
+
+        id: Date.now(),
+
+        type: "single",
+
+        name: product.name,
+
+        amount,
+
+        unitType: product.unitType,
+
+        calories: nutrition.calories,
+
+        protein: nutrition.protein,
+
+        date: getTodayKey()
+
+    });
+
+    saveData();
+
+    closeModal("singleFoodModal");
+
+    renderTodayMeals();
+
+    updateFoodSummary();
+}
+
+
+/* ---------------------------------
+   הרכבת ארוחה
+--------------------------------- */
 
 function openMealBuilder() {
 
@@ -1272,9 +1856,14 @@ function chooseMealProduct() {
 }
 
 
+/* ---------------------------------
+   בחירת כמות למוצר
+--------------------------------- */
+
 function openProductAmount(productId, forMeal = false) {
 
     selectedProductId = productId;
+    amountForMeal = forMeal;
 
     const product =
         products.find(p => p.id === productId);
@@ -1288,23 +1877,33 @@ function openProductAmount(productId, forMeal = false) {
     document.getElementById("amountInput")
         .value = "";
 
+    document.getElementById("amountLabel")
+        .textContent =
+        `כמה ${getUnitName(product.unitType)}?`;
+
+    document.getElementById("amountInput")
+        .placeholder =
+        product.unitType === "units"
+            ? "לדוגמה: 2"
+            : "לדוגמה: 150";
+
     document.getElementById("amountCalculation")
         .innerHTML =
-        `ל־100 גרם: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`;
+        product.unitType === "units"
+            ? `ליחידה: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`
+            : `ל־100 ${getUnitLabel(product.unitType)}: ${product.calories} קל׳ · ${product.protein} ג׳ חלבון`;
 
     document.getElementById("amountModal")
         .classList.add("active");
 
     document.getElementById("amountInput")
         .oninput = calculateAmount;
-
-    window.amountForMeal = forMeal;
 }
 
 
 function calculateAmount() {
 
-    const grams =
+    const amount =
         parseFloat(
             document.getElementById("amountInput").value
         );
@@ -1312,7 +1911,7 @@ function calculateAmount() {
     const product =
         products.find(p => p.id === selectedProductId);
 
-    if (!product || isNaN(grams) || grams <= 0) {
+    if (!product || isNaN(amount) || amount <= 0) {
 
         document.getElementById("amountCalculation")
             .innerHTML =
@@ -1321,34 +1920,35 @@ function calculateAmount() {
         return;
     }
 
-    const calories =
-        product.calories * grams / 100;
-
-    const protein =
-        product.protein * grams / 100;
+    const nutrition =
+        calculateProductNutrition(product, amount);
 
     document.getElementById("amountCalculation")
         .innerHTML = `
 
         <strong>
-            ${grams} גרם
+            ${amount} ${getUnitLabel(product.unitType)}
         </strong>
 
         <br><br>
 
-        🔥 ${calories.toFixed(1)} קלוריות
+        🔥 ${nutrition.calories.toFixed(1)} קלוריות
 
         <br>
 
-        💪 ${protein.toFixed(1)} ג׳ חלבון
+        💪 ${nutrition.protein.toFixed(1)} ג׳ חלבון
 
     `;
 }
 
 
-function addProductToMeal() {
+/* ---------------------------------
+   אישור כמות
+--------------------------------- */
 
-    const grams =
+function confirmAmount() {
+
+    const amount =
         parseFloat(
             document.getElementById("amountInput").value
         );
@@ -1356,38 +1956,75 @@ function addProductToMeal() {
     const product =
         products.find(p => p.id === selectedProductId);
 
-    if (!product || isNaN(grams) || grams <= 0) {
+    if (!product || isNaN(amount) || amount <= 0) {
 
         alert("הכניסי כמות.");
 
         return;
     }
 
-    const calories =
-        product.calories * grams / 100;
+    const nutrition =
+        calculateProductNutrition(product, amount);
 
-    const protein =
-        product.protein * grams / 100;
+    if (amountForMeal) {
 
-    currentMeal.push({
+        currentMeal.push({
 
-        productId: product.id,
+            productId: product.id,
 
-        name: product.name,
+            name: product.name,
 
-        grams,
+            amount,
 
-        calories,
+            unitType: product.unitType,
 
-        protein
+            calories: nutrition.calories,
 
-    });
+            protein: nutrition.protein
 
-    closeModal("amountModal");
+        });
 
-    renderCurrentMeal();
+        closeModal("amountModal");
+
+        renderCurrentMeal();
+
+    } else {
+
+        todayMeals.push({
+
+            id: Date.now(),
+
+            type: "single",
+
+            name: product.name,
+
+            amount,
+
+            unitType: product.unitType,
+
+            calories: nutrition.calories,
+
+            protein: nutrition.protein,
+
+            date: getTodayKey()
+
+        });
+
+        saveData();
+
+        closeModal("amountModal");
+
+        renderTodayMeals();
+
+        updateFoodSummary();
+
+    }
 }
 
+
+/* ---------------------------------
+   הצגת הארוחה הנבנית
+--------------------------------- */
 
 function renderCurrentMeal() {
 
@@ -1423,7 +2060,7 @@ function renderCurrentMeal() {
 
                         <div class="food-info">
 
-                            ${item.grams} ג׳ ·
+                            ${item.amount} ${getUnitLabel(item.unitType)} ·
                             ${item.calories.toFixed(1)} קל׳ ·
                             ${item.protein.toFixed(1)} ג׳ חלבון
 
@@ -1479,6 +2116,10 @@ function removeMealProduct(index) {
 }
 
 
+/* ---------------------------------
+   שמירת ארוחה
+--------------------------------- */
+
 function saveMeal(addToToday) {
 
     const name =
@@ -1520,6 +2161,8 @@ function saveMeal(addToToday) {
 
             id: Date.now() + 1,
 
+            type: "meal",
+
             mealId: meal.id,
 
             name: meal.name,
@@ -1544,6 +2187,10 @@ function saveMeal(addToToday) {
     updateFoodSummary();
 }
 
+
+/* ---------------------------------
+   ארוחות שמורות
+--------------------------------- */
 
 function renderSavedMeals() {
 
@@ -1645,6 +2292,8 @@ function addSavedMealToToday(id) {
 
         id: Date.now(),
 
+        type: "meal",
+
         mealId: meal.id,
 
         name: meal.name,
@@ -1680,6 +2329,10 @@ function deleteMeal(id) {
 }
 
 
+/* ---------------------------------
+   מה אכלתי היום
+--------------------------------- */
+
 function renderTodayMeals() {
 
     const container =
@@ -1687,15 +2340,15 @@ function renderTodayMeals() {
 
     const today =
         todayMeals.filter(
-            meal =>
-            meal.date === getTodayKey()
+            entry =>
+            entry.date === getTodayKey()
         );
 
     if (today.length === 0) {
 
         container.innerHTML = `
             <div class="empty-message">
-                עדיין לא הוספת ארוחה להיום 🍽️
+                עדיין לא הוספת אוכל להיום 🍽️
             </div>
         `;
 
@@ -1703,17 +2356,59 @@ function renderTodayMeals() {
     }
 
     container.innerHTML =
-        today.map(meal => {
+        today.map(entry => {
+
+            if (entry.type === "single") {
+
+                return `
+
+                <div class="today-entry single-item">
+
+                    <div>
+
+                        <div class="added-label">
+                            פריט בודד
+                        </div>
+
+                        <strong>
+                            ${escapeHtml(entry.name)}
+                        </strong>
+
+                        <div class="food-info">
+
+                            ${entry.amount}
+                            ${getUnitLabel(entry.unitType)}
+                            ·
+                            ${entry.calories.toFixed(0)} קל׳ ·
+                            ${entry.protein.toFixed(1)} ג׳ חלבון
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="danger-button"
+                        onclick="deleteTodayMeal(${entry.id})">
+
+                        🗑️
+
+                    </button>
+
+                </div>
+
+                `;
+
+            }
 
             const calories =
-                meal.products.reduce(
+                entry.products.reduce(
                     (sum,item) =>
                     sum + item.calories,
                     0
                 );
 
             const protein =
-                meal.products.reduce(
+                entry.products.reduce(
                     (sum,item) =>
                     sum + item.protein,
                     0
@@ -1721,12 +2416,16 @@ function renderTodayMeals() {
 
             return `
 
-            <div class="today-entry">
+            <div class="today-entry meal-entry">
 
                 <div>
 
+                    <div class="added-label">
+                        ארוחה
+                    </div>
+
                     <strong>
-                        ${escapeHtml(meal.name)}
+                        ${escapeHtml(entry.name)}
                     </strong>
 
                     <div class="food-info">
@@ -1740,7 +2439,7 @@ function renderTodayMeals() {
 
                 <button
                     class="danger-button"
-                    onclick="deleteTodayMeal(${meal.id})">
+                    onclick="deleteTodayMeal(${entry.id})">
 
                     🗑️
 
@@ -1758,7 +2457,7 @@ function deleteTodayMeal(id) {
 
     todayMeals =
         todayMeals.filter(
-            meal => meal.id !== id
+            entry => entry.id !== id
         );
 
     saveData();
@@ -1768,6 +2467,10 @@ function deleteTodayMeal(id) {
     updateFoodSummary();
 }
 
+
+/* ---------------------------------
+   סיכום יומי
+--------------------------------- */
 
 function getTodayKey() {
 
@@ -1785,22 +2488,31 @@ function calculateToday() {
 
     const today =
         todayMeals.filter(
-            meal =>
-            meal.date === getTodayKey()
+            entry =>
+            entry.date === getTodayKey()
         );
 
     let calories = 0;
     let protein = 0;
 
-    today.forEach(meal => {
+    today.forEach(entry => {
 
-        meal.products.forEach(item => {
+        if (entry.type === "single") {
 
-            calories += item.calories;
+            calories += Number(entry.calories) || 0;
+            protein += Number(entry.protein) || 0;
 
-            protein += item.protein;
+        } else {
 
-        });
+            entry.products.forEach(item => {
+
+                calories += Number(item.calories) || 0;
+
+                protein += Number(item.protein) || 0;
+
+            });
+
+        }
 
     });
 
@@ -1835,6 +2547,10 @@ function updateFoodSummary() {
         + " ג׳";
 }
 
+
+/* ---------------------------------
+   משקל
+--------------------------------- */
 
 function addWeight() {
 
@@ -1947,6 +2663,10 @@ function getCurrentWeight() {
 }
 
 
+/* ---------------------------------
+   דף הבית
+--------------------------------- */
+
 function updateHome() {
 
     const current =
@@ -2033,6 +2753,10 @@ function updateAll() {
 }
 
 
+/* ---------------------------------
+   אבטחת טקסט
+--------------------------------- */
+
 function escapeHtml(text) {
 
     const div =
@@ -2043,6 +2767,10 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+
+/* ---------------------------------
+   הפעלה ראשונית
+--------------------------------- */
 
 updateAll();
 
